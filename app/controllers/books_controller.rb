@@ -2,6 +2,7 @@ class BooksController < ApplicationController
   before_action :authenticate_user!
 
   def show
+	  @comment = BookComment.new
 	  @post_book = Book.find(params[:id])
 	  @book = Book.new
 	  @user = current_user
