@@ -48,6 +48,29 @@
 				</tr>
 			</table>
 
+		<h2>Book comments</h2>
+		<table class="table">
+			<% @post_book.book_comments.each do |post_book| %>
+			<tr>
+				<td>
+					<%= link_to (post_book.user) do %>
+						<%= post_book.user.name %></a>
+					<% end %>
+				</td>
+				<td>
+					<%= post_book.comment %>
+				</td>
+				<td>
+					<%= post_book.created_at.strftime('%Y/%m/%d') %>
+				</td>
+				<% if post_book.user_id == current_user.id %>
+					<td><%= link_to "Destroy", book_book_comments_path(post_book.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{post_book.id}" %></td>
+				<% end %>
+			</tr>
+			<% end %>
+		</table>			
+
+		<h2>New comment</h2>
 			<%= form_for [@post_book, @comment] do |f| %>
 				<div class="row">
 					<div class="col-sm-12">
